@@ -34,8 +34,13 @@ class TodoRepositoryImpl implements TodoRepository {
             throw new Error('Method not implemented.');
         }
     }
-    retrieveById(todoId: number): Promise<Todo | null> {
-        throw new Error('Method not implemented.');
+    async retrieveById(todoId: number): Promise<Todo | null> {
+        try{
+            return await Todo.findByPk(todoId)
+        }catch(err) {
+            console.log("Failed to find row for ID: "+todoId+" "+err);
+        }
+        return null;
     }
 
     async retrieveByDeletedIndicator(deleted: boolean) {
@@ -45,11 +50,41 @@ class TodoRepositoryImpl implements TodoRepository {
             throw new Error('Method not implemented.');
         }
     }
-    update(todo: Todo): Promise<number> {
-        throw new Error('Method not implemented.');
+    async update(todo: Todo): Promise<number> {
+        try{
+            const todoRow = Todo.findByPk(todo.id)
+            if(!todoRow) {
+                throw new Error("Not found");
+            }
+            this.handleResult(todo, todoRow )
+        }catch(err) {
+            console.log("Update failed: "+err);
+        }
     }
+    async handleResult(todo: Todo, result: { data:Promise<Todo | null> }) {
+        let todoRow = result.data;
+        todoRow.set({
+            title: todo.title,
+            description: todo.description,
+            active: todo.active,
+            deleted: todo.deleted,
+            completed: todo.completed
+        });
+        await todoRow.save();
+    }
+
     async delete(todoId: number): Promise<number> {
-        throw new Error('Method not implemented.');
+        try{
+            return await Todo.destroy({
+                where: {
+                    id: {
+                        [Op.eq]: todoId
+                    }
+                }
+            })
+        }catch(err) {
+            throw new Error('Delete failed for the Id provided:.'+ todoId+' '+err);
+        }
     }
     async deleteAll(): Promise<number> {
         try{
