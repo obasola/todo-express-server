@@ -1,0 +1,33 @@
+{
+  "name": "todo-exp-server",
+  "version": "1.0.0",
+  "description": "An Express server for REST api calls for a Todo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+  },
+  "keywords": [
+    "resp",
+    "express"
+  ],
+  "author": "dthompson",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.5.2",
+    "sequelize": "^6.32.1",
+    "sequelize-typescript": "^2.1.5",
+    "ts-node": "^10.9.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.5",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.1.6"
+  }
+}
