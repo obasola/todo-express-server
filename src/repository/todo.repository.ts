@@ -52,27 +52,23 @@ class TodoRepositoryImpl implements TodoRepository {
     }
     async update(todo: Todo): Promise<number> {
         try{
-            const todoRow = Todo.findByPk(todo.id)
+            const todoRow = await Todo.findByPk(todo.id)
             if(!todoRow) {
                 throw new Error("Not found");
             }
-            this.handleResult(todo, todoRow )
+            todoRow.title = todo.title,
+            todoRow.description = todo.description,
+            todoRow.active = todo.active,
+            todoRow.deleted = todo.deleted,
+            todoRow.completed = todo.completed
+            todoRow.save();
+            return 0;
         }catch(err) {
             console.log("Update failed: "+err);
         }
+        return 1;
     }
-    async handleResult(todo: Todo, result: { data:Promise<Todo | null> }) {
-        let todoRow = result.data;
-        todoRow.set({
-            title: todo.title,
-            description: todo.description,
-            active: todo.active,
-            deleted: todo.deleted,
-            completed: todo.completed
-        });
-        await todoRow.save();
-    }
-
+    
     async delete(todoId: number): Promise<number> {
         try{
             return await Todo.destroy({
