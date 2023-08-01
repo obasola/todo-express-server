@@ -3,7 +3,7 @@ import { config, dialect } from '../db/db.config';
 import Todo from '../src/models/Todo.model';
 import TodoItem from '../src/models/TodoItem.model';
 import User from '../src/models/User.model';
-import UserTodo from '../src/models/UserTodo.model';
+
 
 class Database{
     public sequelize: Sequelize | undefined;
@@ -16,7 +16,7 @@ class Database{
             password: config.PASSWORD,
             host: config.HOST,
             dialect: dialect,
-            models: [Todo, TodoItem, User, UserTodo]
+            models: [Todo, TodoItem, User]
         });
 
         await this.sequelize

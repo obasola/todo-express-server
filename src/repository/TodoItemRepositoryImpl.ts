@@ -1,7 +1,7 @@
 import TodoItemRepository from "../interfaces/TodoItemRepository";
 import TodoItem from "../models/TodoItem.model";
 
-class TodoItemRepositoryImple implements TodoItemRepository {
+class TodoItemRepositoryImpl implements TodoItemRepository {
     save(todo: TodoItem): Promise<TodoItem> {
         throw new Error("Method not implemented.");
     }
@@ -28,3 +28,4 @@ class TodoItemRepositoryImple implements TodoItemRepository {
     }
     
 }
+export default new TodoItemRepositoryImpl();

@@ -1,4 +1,7 @@
-export const config = {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.dialect = exports.config = void 0;
+exports.config = {
     HOST: "localhost",
     USER: "root",
     PASSWORD: "Password2023!",
@@ -10,5 +13,4 @@ export const config = {
         idle: 10000
     }
 };
-
-export const dialect = "mysql"
+exports.dialect = "mysql";

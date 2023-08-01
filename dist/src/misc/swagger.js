@@ -1,7 +1,5 @@
-import {Express, Request, Response} from 'express';
-import swaggerJsDoc from 'swagger-jsdoc';
-import swaggerUI from 'swagger-ui-express';
-import simpleLogger from '../misc/SimpleLogger';
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /*
 const log = simpleLogger.initializeLogging();
 const swaggerDefinitions = {
@@ -33,4 +31,4 @@ function swaggerDocs(app: Express, port: number) {
 }
 
 export default swaggerDocs;
-*/
+*/ 
