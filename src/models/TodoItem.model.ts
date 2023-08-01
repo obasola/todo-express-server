@@ -2,7 +2,7 @@ import { Model } from "sequelize-typescript";
 import { Table, Column, DataType } from "sequelize-typescript";
 
 @Table ({
-    tableName: "Item"
+    tableName: "TodoItem"
 })
 
 export default class TodoItem extends Model {

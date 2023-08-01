@@ -1,6 +1,6 @@
 import { Model } from "sequelize-typescript";
 import { Table, Column, DataType } from "sequelize-typescript";
-
+import Todo  from './Todo.model'
 @Table ({
     tableName: "Users"
 })
@@ -50,4 +50,11 @@ export default class User extends Model {
     })
     deleted?: boolean;
 
+    
 }
+User.hasMany(Todo, {
+    as: 'todos'
+});
+Todo.belongsTo(User, {
+    foreignKey: 'user_id'
+})
