@@ -12,30 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// @/main.ts
+require("reflect-metadata");
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const SimpleLogger_1 = __importDefault(require("./src/misc/SimpleLogger"));
 const swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
-const body_parser_1 = __importDefault(require("body-parser"));
-const connection_1 = __importDefault(require("./db/connection"));
 dotenv_1.default.config();
-// Create an instance of the Express application
+const connection_1 = __importDefault(require("././db/connection"));
+const body_parser_1 = __importDefault(require("body-parser"));
 const app = (0, express_1.default)();
-// Configure body parser middleware to parse JSON data
 app.use(body_parser_1.default.json());
-const port = process.env.PORT;
+const port = process.env.port;
 const log = SimpleLogger_1.default.initializeLogging();
-app.get("/", (req, res) => {
-    res.send(" Express + Typescript server ");
-});
-//middlewares
-app.use(express_1.default.json());
-app.use(express_1.default.urlencoded({ extended: true }));
-//routes
-//app.use("/api/v1/posts", router);
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
+// ...
+const start = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield connection_1.default.sync();
+        log.info("DB connection initiated");
+    }
+    catch (error) {
+        console.error(error);
+        process.exit(1);
+    }
 });
 // Swagger declaration
 const swaggerDefinition = {
@@ -51,14 +51,4 @@ const options = {
 };
 const swaggerSpec = (0, swagger_jsdoc_1.default)(options);
 app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerSpec));
-// start server using: node index.js :
-const start = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield connection_1.default.sync();
-        log.info("DB connection initiated");
-    }
-    catch (error) {
-        console.error(error);
-        process.exit(1);
-    }
-});
+void start();

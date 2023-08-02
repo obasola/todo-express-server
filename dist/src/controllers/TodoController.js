@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateTodo = exports.getTodoById = exports.getAllToDo = exports.deleteToDo = exports.createToDo = void 0;
 const Todo_model_1 = __importDefault(require("../models/Todo.model"));
 const createToDo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    var todo = yield Todo_model_1.default.create(Object.assign({}, req.body));
+    const data = req.body.Todo;
+    var todo = yield Todo_model_1.default.create(data);
     return res
         .status(200)
         .json({ message: "Todo created successfully", data: todo });
@@ -47,6 +48,7 @@ const getTodoById = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
 exports.getTodoById = getTodoById;
 const updateTodo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
+    const data = req.body.Todo;
     yield Todo_model_1.default.update(Object.assign({}, req.body), { where: { id } });
     const updatedTodo = yield Todo_model_1.default.findByPk(id);
     return res

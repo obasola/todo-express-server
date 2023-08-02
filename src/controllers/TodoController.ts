@@ -2,9 +2,13 @@ import { RequestHandler } from "express";
 import todoRepositoryImpl from "../repository/TodoRepositoryImpl";
 
 import Todo from "../models/Todo.model";
+import { Optional } from "sequelize";
 
 export const createToDo: RequestHandler = async (req, res, next) => {
-  var todo = await Todo.create({ ...req.body });
+  const data = req.body.Todo;
+
+  var todo = await Todo.create(data);
+
   return res
     .status(200)
     .json({ message: "Todo created successfully", data: todo });
@@ -36,6 +40,7 @@ export const getTodoById: RequestHandler = async (req, res, next) => {
 
 export const updateTodo: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
+  const data = req.body.Todo;
   await Todo.update({ ...req.body }, { where: { id } });
   const updatedTodo: Todo | null = await Todo.findByPk(id);
   return res

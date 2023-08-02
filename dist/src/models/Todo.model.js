@@ -8,13 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_typescript_1 = require("sequelize-typescript");
 const sequelize_typescript_2 = require("sequelize-typescript");
-const TodoItem_model_1 = __importDefault(require("./TodoItem.model"));
 let Todo = class Todo extends sequelize_typescript_1.Model {
 };
 __decorate([
@@ -22,68 +18,70 @@ __decorate([
         type: sequelize_typescript_2.DataType.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        field: "id"
+        field: "id",
     }),
     __metadata("design:type", Number)
 ], Todo.prototype, "id", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.INTEGER,
-        field: "user_id"
+        field: "user_id",
     }),
     __metadata("design:type", Number)
 ], Todo.prototype, "userId", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.STRING,
-        field: "title"
+        field: "title",
     }),
     __metadata("design:type", String)
 ], Todo.prototype, "title", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.STRING,
-        field: "description"
+        field: "description",
     }),
     __metadata("design:type", String)
 ], Todo.prototype, "description", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.BOOLEAN,
-        field: "active"
+        field: "active",
     }),
     __metadata("design:type", Boolean)
 ], Todo.prototype, "active", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.BOOLEAN,
-        field: "deleted"
+        field: "deleted",
     }),
     __metadata("design:type", Boolean)
 ], Todo.prototype, "deleted", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.BOOLEAN,
-        field: "completed"
+        field: "completed",
     }),
     __metadata("design:type", Boolean)
 ], Todo.prototype, "completed", void 0);
 __decorate([
     (0, sequelize_typescript_2.Column)({
         type: sequelize_typescript_2.DataType.DATE,
-        field: "date_created"
+        field: "date_created",
     }),
     __metadata("design:type", Date)
 ], Todo.prototype, "dateCreated", void 0);
 Todo = __decorate([
     (0, sequelize_typescript_2.Table)({
-        tableName: "Todo"
+        tableName: "Todo",
     })
 ], Todo);
 exports.default = Todo;
-Todo.hasMany(TodoItem_model_1.default, {
-    as: 'items'
+/*
+Todo.hasMany(TodoItem, {
+  as: "items",
 });
-TodoItem_model_1.default.belongsTo(Todo, {
-    foreignKey: 'todo_id'
+TodoItem.belongsTo(Todo, {
+  foreignKey: "todo_id",
 });
+*/
